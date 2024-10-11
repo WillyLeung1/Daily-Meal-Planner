@@ -1,6 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import './Select.css';
+import './Select.scss';
 
 const Select = (props) => (
   <select value={props.value} onChange={props.handler} name={props.name} className={`Select ${props.className}`}>

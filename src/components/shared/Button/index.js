@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
 import { NavLink as Link } from 'react-router-dom';
-import './Button.css';
+import './Button.scss';
 
 /** type of buttons: 1. regular 2. accent 3. transparent **/
 export default  class Button extends Component{

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Landing.css';
+import './Landing.scss';
 import Button from '../../shared/Button';
 
 const Landing = (props) => (

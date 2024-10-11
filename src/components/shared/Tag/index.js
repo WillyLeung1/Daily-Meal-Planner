@@ -1,6 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import './Tag.css';
+import './Tag.scss';
 
 const Tag = (props) => (
   <div className={`Tag ${props.className}`}>

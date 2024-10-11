@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Proptypes from 'prop-types';
-import './Tabs.css';
+import './Tabs.scss';
 
 export default class Tabs extends Component{
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from '../Button';
-import './Nav.css';
+import './Nav.scss';
 
 const Nav = () => (
   <div className="Nav">

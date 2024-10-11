@@ -1,7 +1,7 @@
 import React from 'react';
 import Proptypes from 'prop-types';
 import Tag from '../Tag';
-import './Meal.css';
+import './Meal.scss';
 
 const Meal = (props) => (
   <a className="Meal" href={props.url} target="_blank">

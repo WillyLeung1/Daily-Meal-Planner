@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import 'font-awesome/css/font-awesome.css';
 
-import './global.css';
+import './global.scss';
 
 import Landing from './components/page/Landing';
 import Survey from './components/page/Survey';

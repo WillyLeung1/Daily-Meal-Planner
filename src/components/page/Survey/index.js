@@ -11,7 +11,7 @@ import Nav from '../../shared/Nav';
 import getPlan from '../../../utils/mealPlan';
 import { getSurveyData } from '../../../utils/data';
 
-import './Survey.css';
+import './Survey.scss';
 
 export default class Survey extends Component{
 

@@ -4,7 +4,7 @@ import Tabs, {Tab} from '../../shared/Tabs';
 import NotFound from '../../shared/NotFound';
 import Nav from '../../shared/Nav';
 
-import './Plan.css';
+import './Plan.scss';
 
 const createContent = (heading,dataOb,index) => {
   let contentArr = [];

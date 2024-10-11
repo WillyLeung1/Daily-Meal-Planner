@@ -4,7 +4,6 @@
   "private": false,
   "dependencies": {
     "font-awesome": "^4.7.0",
-    "node-sass-chokidar": "1.5.0",
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
@@ -12,12 +11,19 @@
     "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "css-loader": "^4.3.0",
     "gh-pages": "^1.1.0",
-    "react-scripts": "1.0.17"
+    "react-scripts": "1.0.17",
+    "sass": "^1.79.5",
+    "sass-loader": "^7.2.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.4.0",
+    "webpack-cli": "^3.3.12"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
+    "build-css": "sass src/scss:src/css",
+    "watch-css": "chokidar 'src/scss/**/*.scss' -c 'npm run build-css'",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",

@@ -1,6 +1,6 @@
 import React from 'react';
 import Proptypes from 'prop-types';
-import './Checkbox.css';
+import './Checkbox.scss';
 import  { generateId } from '../../../../utils/generate';
 
 const createCheckbox = (data, toggleHandler, isCheckedState) => (
