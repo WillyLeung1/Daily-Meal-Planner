@@ -10,6 +10,7 @@ import Nav from '../../shared/Nav';
 //api related
 import getPlan from '../../../utils/mealPlan';
 import { getSurveyData } from '../../../utils/data';
+import { submitSurvey } from '../../../utils/submitSurvey';
 
 import './Survey.css';
 
@@ -92,28 +93,43 @@ export default class Survey extends Component{
     }
   }
 
+  // Willy: Made changes to this method for POST Request
   getMealPlan = (e) => {
     e.preventDefault();
     const { mealCount, planType, healthPreferences, calories, diet } = this.state;
-    // const dietPreference = this.data.dietSpec[diet.activeIndex].name;
     const meals = this.data.mealTypes[mealCount];
     const res = {
       plan: planType,
       health: healthPreferences,
-      calories: {min:calories.min,max:calories.max},
+      calories: { min: calories.min, max: calories.max },
       diet: diet.name,
       meals: meals,
-    }
-    this.setState({loading:true},() => {
-      getPlan(res).then(
-        (data) => {
-          let par = {num:this.state.planType,data: data}
-          //stop loading and redirect to meal page
-          this.setState({loading:false, redirect: true, data: par});
-        }
-     );
+    };
+  
+    console.log("Calling getPlan with:", res); // Debugging
+  
+    this.setState({ loading: true }, () => {
+      getPlan(res)
+        .then((data) => {
+          console.log("getPlan result:", data); // Debugging
+          let par = { num: this.state.planType, data: data };
+          
+          // Stop loading and redirect to meal page
+          this.setState({ loading: false, redirect: true, data: par });
+  
+          // Attempt to send survey data to MongoDB
+          try {
+            submitSurvey(res);
+          } catch (error) {
+            console.error("Error submitting survey data:", error);
+          }
+        })
+        .catch((error) => {
+          console.error("Error in getPlan:", error);
+          this.setState({ loading: false });
+        });
     });
-  }
+  };
 
   render(){
     const { selectOpt, dietSpec, healthSpec } = this.data;
