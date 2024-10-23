@@ -1,0 +1,100 @@
+@import '../../../partials/manifest.scss'; // 导入 manifest.scss 文件
+@keyframes spin { // 定义一个动画名为 spin
+    0% { transform: rotate(0deg); } // 动画开始时旋转角度为 0 度
+    100% { transform: rotate(360deg); } // 动画结束时旋转角度为 360 度
+}
+.Survey{
+  color: $asphalt; // 使用变量 $asphalt 作为文本颜色
+}
+.Survey__loading{
+  position: absolute; // 绝对定位
+  top:0; // 顶部对齐
+  left:0; // 左侧对齐
+  width:100%; // 宽度为 100%
+  height: 100%; // 高度为 100%
+  background: $turq; // 背景颜色为 $turq
+  z-index:1; // z-index 设置为 1，覆盖其他内容
+  display: flex; // 使用 flexbox 布局
+  flex-flow: column; // 垂直方向排列
+  align-items: center; // 子元素水平居中
+  justify-content: center; // 子元素垂直居中
+  &__icon{
+    color:white; // 图标颜色为白色
+    font-size: 4rem; // 字体大小为 4rem
+    font-family: $nunito; // 使用 $nunito 字体
+    animation: spin 2s linear infinite; // 添加旋转动画，2秒完成一次循环，持续无限次
+  }
+}
+.Survey__content{
+  padding: 1rem; // 内边距为 1rem
+}
+.Survey__heading{
+  text-align: center; // 文本居中对齐
+  margin: 2rem; // 外边距为 2rem
+  font-size: 0.5rem; // 字体大小为 0.5rem
+  text-transform: uppercase; // 文本全部大写
+  color: $turq; // 文本颜色为 $turq
+  letter-spacing: 3px; // 字母间距为 3px
+  font-family: $nunito; // 使用 $nunito 字体
+}
+.Survey__tabs{
+  border: solid 3px; // 边框宽度为 3px 的实线
+  margin: auto; // 自动外边距使元素居中
+  .Tabs__head{
+    background: $silver; // 背景颜色为 $silver
+    font-size: 1.4rem; // 字体大小为 1.4rem
+  }
+}
+.Survey__goto{
+  margin-top: 3rem; // 上方外边距为 3rem
+  display: flex; // 使用 flexbox 布局
+}
+.Survey__goto__button--next,.Survey__goto__button--back{
+  font-size: 1.3rem; // 字体大小为 1.3rem
+}
+.Survey__goto__button--next{
+  margin-left: auto; // 左侧自动外边距，将按钮推到右侧
+}
+.Survey__goto__button--back{
+  font-size: 1.3rem; // 字体大小为 1.3rem
+  background-color: $hotpink; // 背景颜色为 $hotpink
+}
+.Survey__input--custom{
+  margin-left: 0; // 左侧外边距为 0
+  input{
+    padding: 1rem 3rem; // 上下内边距为 1rem，左右内边距为 3rem
+    border-radius: 0; // 边框圆角为 0
+    font-size: 1rem; // 字体大小为 1rem
+    border-color: #e3e3e3; // 边框颜色为 #e3e3e3
+    color: $turq; // 文本颜色为 $turq
+    // margin-right: 2rem; // 右侧外边距为 2rem（已被注释）
+    &:focus{
+      color:$flatred; // 输入框聚焦时文本颜色变为 $flatred
+    }
+  }
+}
+//larger screens
+@media (min-width:900px){ // 针对宽度大于 900px 的屏幕
+  .Survey__content{
+    padding: 3rem 6rem; // 内边距为上下 3rem，左右 6rem
+  }
+  .Survey__heading{
+    margin: 2rem 0 3rem 0; // 上下外边距分别为 2rem 和 3rem
+  }
+  .Survey__tabs{
+    width: 40rem; // 设置宽度为 40rem
+  }
+  .Survey__input--custom{
+    margin-left: 2rem; // 左侧外边距为 2rem
+    input{
+      padding: 1rem 3rem; // 上下内边距为 1rem，左右内边距为 3rem
+      border-radius: 0; // 边框圆角为 0
+      font-size: 1rem; // 字体大小为 1rem
+      color: $turq; // 文本颜色为 $turq
+      margin-right: 2rem; // 右侧外边距为 2rem
+      &:focus{
+        color:$flatred; // 输入框聚焦时文本颜色变为 $flatred
+      }
+    }
+  }
+}
