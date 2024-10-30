@@ -10,7 +10,7 @@ import Nav from '../../shared/Nav';
 //api related
 import getPlan from '../../../utils/mealPlan';
 import { getSurveyData } from '../../../utils/data';
-import { submitSurvey } from '../../../utils/submitSurvey';
+import submitSurvey from '../../../utils/submitSurvey';
 
 import './Survey.css';
 

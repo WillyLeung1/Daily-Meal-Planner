@@ -1,19 +1,26 @@
-// survey.js
-import express from "express";
-import { db } from "./db.js"; // Import db instance
+import express from 'express';
+import Survey from './mongoDataFormat.js';  // Import the renamed model
 
 const router = express.Router();
 
-// Route to save survey data
-router.post("/", async (req, res) => {
-  try {
-    const collection = db.collection("surveys");
-    const result = await collection.insertOne(req.body);
-    res.status(201).json({ message: "Survey data saved", result });
-  } catch (error) {
-    console.error("Error saving survey data:", error);
-    res.status(500).json({ message: "Error saving survey data" });
-  }
+// Handle POST request for combined survey and meal plan data
+router.post('/', async (req, res) => {
+    try {
+        const { survey, mealPlan } = req.body;
+
+        // Create a document with survey and meal plan data
+        const surveyEntry = new Survey({
+            surveyData: survey,
+            mealPlanData: mealPlan,
+        });
+
+        // Save to MongoDB
+        await surveyEntry.save();
+        res.status(201).json({ message: 'Data saved successfully' });
+    } catch (error) {
+        console.error('Error saving data:', error);
+        res.status(500).json({ message: 'Failed to save data' });
+    }
 });
 
 export default router;

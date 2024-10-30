@@ -4,10 +4,12 @@
   "private": false,
   "type": "module",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "font-awesome": "^4.7.0",
     "mongodb": "^6.9.0",
+    "mongoose": "^8.7.3",
     "npm-run-all": "^4.1.2",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
