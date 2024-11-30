@@ -5,7 +5,7 @@ const surveyData = {
     planType: [
       { val: 7, text: "Weekly" },
       { val: 1, text: "Daily" },
-      { val: 5, text: "Custom Plan" }, // Custom Plan remains fixed
+      { val: 5, text: "Custom Plan" },
     ],
   },
   dietSpec: [
@@ -27,6 +27,10 @@ const surveyData = {
   calories: {
     min: 1800,
     max: 2500,
+  },
+  cookingTime: {
+    min: 15, // Adjusted to match the validation in Survey.js
+    max: 999, // Adjusted to match the validation in Survey.js
   },
 };
 const API = {

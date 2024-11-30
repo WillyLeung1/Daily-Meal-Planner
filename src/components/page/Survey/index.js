@@ -32,9 +32,10 @@ export default class Survey extends Component {
       healthPreferences: {},
       calories: calories,
       diet: defaultDiet,
+      cookingTime: 30,
       loading: false,
       redirect: false,
-      customPlanDays: 1, // Default for custom days
+      customPlanDays: 1,
     });
   }
 
@@ -70,8 +71,15 @@ export default class Survey extends Component {
   };
 
   handleDiet = (index) => {
-    const name = this.data.dietSpec[index].name || 'Standard';
+    const name = (this.data.dietSpec[index] && this.data.dietSpec[index].name) || 'Standard';
     this.setState({ diet: { activeIndex: index, name: name } });
+  };
+
+  handleCookingTime = (e) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value >= 15 && value <= 999) {
+      this.setState({ cookingTime: value });
+    }
   };
 
   goTo = (e) => {
@@ -86,7 +94,7 @@ export default class Survey extends Component {
 
   getMealPlan = (e) => {
     e.preventDefault();
-    const { mealCount, planType, healthPreferences, calories, diet, customPlanDays } = this.state;
+    const { mealCount, planType, healthPreferences, calories, diet, cookingTime, customPlanDays } = this.state;
 
     const meals = this.data.mealTypes[mealCount] || [];
     const minCalories = parseInt(calories.min, 10);
@@ -97,8 +105,9 @@ export default class Survey extends Component {
       health: healthPreferences,
       calories: { min: minCalories, max: maxCalories },
       diet: diet.name,
+      cookingTime: cookingTime,
       meals,
-      days: planType === 5 ? customPlanDays : planType, // Use customPlanDays for Custom Plan
+      days: planType === 5 ? customPlanDays : planType,
     };
 
     console.log("Request Data Sent to getPlan:", requestData);
@@ -118,7 +127,7 @@ export default class Survey extends Component {
 
   render() {
     const { selectOpt, dietSpec, healthSpec } = this.data;
-    const { planType, calories, customPlanDays } = this.state;
+    const { planType, calories, cookingTime, customPlanDays } = this.state;
 
     return (
       <div className="Survey">
@@ -156,22 +165,14 @@ export default class Survey extends Component {
                     handler={this.handleSelect}
                     options={selectOpt.planType}
                   />
-                  {planType === 5 && ( // Show dropdown for Custom Plan only
+                  {planType === 5 && (
                     <label>
                       Number of Custom Days:
                       <Select
                         name="customPlanDays"
                         value={customPlanDays || 1}
                         handler={(e) => this.setState({ customPlanDays: parseInt(e.target.value, 10) })}
-                        options={[
-                          { val: 1, text: "1 Day" },
-                          { val: 2, text: "2 Days" },
-                          { val: 3, text: "3 Days" },
-                          { val: 4, text: "4 Days" },
-                          { val: 5, text: "5 Days" },
-                          { val: 6, text: "6 Days" },
-                          { val: 7, text: "7 Days" },
-                        ]}
+                        options={[{ val: 1, text: "1 Day" }, { val: 2, text: "2 Days" }, { val: 3, text: "3 Days" }, { val: 4, text: "4 Days" }, { val: 5, text: "5 Days" }, { val: 6, text: "6 Days" }, { val: 7, text: "7 Days" }]}
                       />
                     </label>
                   )}
@@ -230,6 +231,21 @@ export default class Survey extends Component {
                         value={calories.max}
                       />
                     </div>
+                  )}
+                  <div className="Survey__goto">
+                    <Button name="back" onClick={this.goTo} className="Survey__goto__button--back">Back</Button>
+                    <Button name="next" onClick={this.goTo} className="Survey__goto__button--next">Next</Button>
+                  </div>
+                </Tab>
+
+                <Tab heading="6">
+                  <h2>Estimate Cooking Time (15-999 in minutes)</h2>
+                  <input type="number" value={this.state.cookingTime} onChange={this.handleCookingTime} min="15" max="999" />
+                  <p>Calories Range: {calories.min} - {calories.max} kcal</p>
+                  {cookingTime < 25 && (
+                    <p className="warning">
+                      Cooking time is less than 30 minutes. Some meals might not fit within this time while meeting the calorie range of {calories.min} - {calories.max} kcal.
+                    </p>
                   )}
                   <div className="Survey__goto">
                     <Button name="back" onClick={this.goTo} className="Survey__goto__button--back">Back</Button>
