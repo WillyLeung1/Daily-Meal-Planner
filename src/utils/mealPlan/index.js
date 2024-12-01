@@ -1,59 +1,92 @@
+
+// change meal
 import { getAPIData } from '../data';
 
-const getPlan = (data) =>{
+// Fetch new meal data based on criteria
+export const fetchNewMeal = async (criteria) => {
+  try {
+    const { ID, KEY, URL } = getAPIData();
+    const query = `q=${criteria}&app_id=${ID}&app_key=${KEY}`;
+    const response = await fetch(URL + query);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch data: ${response.statusText}`);
+    }
+
+    const data = await response.json();
+    return data.hits || [];
+  } catch (error) {
+    console.error("Error fetching new meal:", error);
+    return [];
+  }
+};
+
+
+// Function to generate meal plan
+const getPlan = (data) => {
   const { ID, KEY, URL } = getAPIData();
-  let queryObj = buildQuery(data,ID,KEY);
-  let promises = [], result = {};
-  for(let key in queryObj){
-    let str = encodeURI(URL + queryObj[key]);
+  const queryObj = buildQuery(data, ID, KEY);
+  const promises = [];
+  const result = {};
+
+  for (let key in queryObj) {
+    const queryString = encodeURI(URL + queryObj[key]);
     promises.push(
-      fetch(str)
-      .then((res) => res.json())
-      .then((data) => {
-        result[key] = data.hits;
-      })
-      .catch((err) => console.error(err))
+      fetch(queryString)
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Failed to fetch plan data for ${key}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          result[key] = data.hits;
+        })
+        .catch((err) => console.error("Error fetching plan data:", err))
     );
   }
-  return Promise.all(promises).then(() => {
-    return result;
-  });
-}
 
-//returns an object of query strings with meal-types as keys
+  return Promise.all(promises).then(() => result);
+};
+
+// Helper function to build query strings for each meal type
 const buildQuery = (data, ID, KEY) => {
-  if(!data.plan || !data.meals || !data.calories || !data.diet){
+  if (!data.plan || !data.meals || !data.calories || !data.diet) {
     return false;
   }
-  const type = parseInt(data.plan,10);
-  const count =  data.meals.length;
+
+  const type = parseInt(data.plan, 10);
+  const count = data.meals.length;
   const calories = {
-    min: Math.round(parseInt(data.calories.min,10)/count),
-    max: Math.round(parseInt(data.calories.max,10)/count),
-  }
+    min: Math.round(parseInt(data.calories.min, 10) / count),
+    max: Math.round(parseInt(data.calories.max, 10) / count),
+  };
+
   let health = "";
-  if(data.health){
-    health = stitch(data.health,"health");
+  if (data.health) {
+    health = stitch(data.health, "health");
   }
-  let labelArr = data.meals;
-  let queries = {};
-  for(let i=0;i<count;i++){
-    let str = labelArr[i];
-    let query = `q=${str}&app_id=${ID}&app_key=${KEY}&to=${type}&diet=${data.diet}${health}&calories=${calories.min}-${calories.max}`;
-    queries[str]= query;
+
+  const labelArr = data.meals;
+  const queries = {};
+
+  for (let i = 0; i < count; i++) {
+    const str = labelArr[i];
+    const query = `q=${str}&app_id=${ID}&app_key=${KEY}&to=${type}&diet=${data.diet}${health}&calories=${calories.min}-${calories.max}`;
+    queries[str] = query;
   }
   return queries;
-}
+};
 
+// Helper function to concatenate health filters
 const stitch = (ob, label) => {
-  let res="&";
-  for(let i in ob){
-    if(ob[i].toString() === "true"){
-        res+=`${label}=${i}&`;
+  let res = "&";
+  for (let key in ob) {
+    if (ob[key].toString() === "true") {
+      res += `${label}=${key}&`;
     }
   }
-  //remove that last ampersand
-  return res.slice(0,-1);
-}
+  return res.slice(0, -1);
+};
 
 export default getPlan;

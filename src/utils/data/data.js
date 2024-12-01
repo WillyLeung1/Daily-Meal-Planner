@@ -34,8 +34,8 @@ const surveyData = {
   },
 };
 const API = {
-  ID: "36d8b95c",
-  KEY: "2e0a3af1f1280c0926d827d2df95d010	",
+  ID: "ee65709d",
+  KEY: "0973f2377f3dc6951e2d0a836ecf1f51",
   URL: "https://api.edamam.com/search?",
 };
 
