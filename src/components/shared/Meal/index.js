@@ -1,11 +1,11 @@
 
-// Change meal 
+
+// Change meal plan
 import React from 'react';
 import PropTypes from 'prop-types';
 import Tag from '../Tag';
 import './Meal.css';
 
-// Set CSS style for button
 const Meal = (props) => (
   <div className="Meal" style={{ position: "relative" }}>
     <div className="Meal__replace">
@@ -20,11 +20,11 @@ const Meal = (props) => (
           cursor: "pointer",
           fontSize: "14px",
           fontWeight: "bold",
-          transition: "all 0.3s ease",
+          transition: "all 0.3s ease", 
         }}
         onMouseEnter={(e) => {
-          e.target.style.backgroundColor = "#B0E2FF";
-          e.target.style.color = "#000";
+          e.target.style.backgroundColor = "#B0E2FF"; 
+          e.target.style.color = "#000"; 
           e.target.style.transform = "scale(1.1)";
         }}
         onMouseLeave={(e) => {
