@@ -53,7 +53,7 @@ const Plan = (props) => {
   if(!props.location || !props.location.state || !props.location.state.data) return (
     <div>
       <Nav />
-      <NotFound />
+      {/* <NotFound /> */}
     </div>
   )
   let param = props.location.state.data;

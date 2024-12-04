@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+
 const MealPlanDisplay = () => {
     const { id } = useParams();
     const [mealPlanData, setMealPlanData] = useState(null);

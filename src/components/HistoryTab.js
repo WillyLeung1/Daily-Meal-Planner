@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import fetchHistory from '../utils/fetchHistory'; // Import fetchHistory to retrieve the meal plans
+import Nav from './shared/Nav';
 
 const HistoryTab = () => {
     const [historyData, setHistoryData] = useState([]);
@@ -34,6 +35,7 @@ const HistoryTab = () => {
 
     return (
         <div>
+            <Nav />
             <h2>Meal History</h2>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
                 {historyData.map((plan) => (
