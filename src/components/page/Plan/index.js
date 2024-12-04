@@ -66,8 +66,8 @@ const createContent = (heading, dataOb, index, userInputTime, replacedMeals, han
               onReplace={elem.onReplace}
             />
             {/* Show calories */}
-            <p className="Calories">
-              Calories: {recipe.calories ? recipe.calories.toFixed(2) : "Not Available"}
+            <p className = "Calories">
+              Calories: {recipe.calories ? recipe.calories.toFixed(2) : "N/A"}
             </p>
           </div>
         );

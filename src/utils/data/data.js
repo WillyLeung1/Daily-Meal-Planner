@@ -5,7 +5,7 @@ const surveyData = {
     planType: [
       { val: 7, text: "Weekly" },
       { val: 1, text: "Daily" },
-      { val: 5, text: "Custom Plan" },
+      { val: 6, text: "Custom Plan" }, // 6 is an arbitrary value, look at src/components/page/Survey/index.js
     ],
   },
   dietSpec: [
@@ -34,9 +34,9 @@ const surveyData = {
   },
 };
 const API = {
-  ID: "ee65709d",
-  KEY: "0973f2377f3dc6951e2d0a836ecf1f51",
-  URL: "https://api.edamam.com/search?",
+  ID : "0da8a011",
+  KEY : "80d1a4b2bb32f1c3fc29930c9154cbcb",
+  URL : "https://api.edamam.com/search?",
 };
 
 export { surveyData as Survey, API };
