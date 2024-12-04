@@ -208,6 +208,7 @@ export default class Survey extends Component {
                                     </RadioGroup>
                                     <div className="Survey__goto">
                                         <Button name="back" onClick={this.goTo} className="Survey__goto__button--back">Back</Button>
+                                        <Button name="skip" onClick={() => this.tabs.handleClick(3)}>Skip</Button>
                                         <Button name="next" onClick={this.goTo} className="Survey__goto__button--next">Next</Button>
                                     </div>
                                 </Tab>
@@ -221,6 +222,7 @@ export default class Survey extends Component {
                                     />
                                     <div className="Survey__goto">
                                         <Button name="back" onClick={this.goTo} className="Survey__goto__button--back">Back</Button>
+                                        <Button name="skip" onClick={() => this.tabs.handleClick(4)}>Skip</Button>
                                         <Button name="next" onClick={this.goTo} className="Survey__goto__button--next">Next</Button>
                                     </div>
                                 </Tab>
@@ -251,6 +253,7 @@ export default class Survey extends Component {
                                     ) : null}
                                     <div className="Survey__goto">
                                         <Button name="back" onClick={this.goTo} className="Survey__goto__button--back">Back</Button>
+                                        <Button name="skip" onClick={() => this.tabs.handleClick(5)}>Skip</Button>
                                         <Button name="next" onClick={this.goTo} className="Survey__goto__button--next">Next</Button>
                                     </div>
                                 </Tab>
