@@ -13,10 +13,10 @@ const fetchHistory = async () => {
         }
 
         const data = await response.json();
-        console.log("Fetched data:", data);  // Log fetched data to check response structure
+        console.log("Fetched data:", data);  // Log fetched data (debugging)
         return data;
     } catch (error) {
-        console.error('Error fetching history data:', error);  // More specific error logging
+        console.error('Error fetching history data:', error);
         throw error;
     }
 };
