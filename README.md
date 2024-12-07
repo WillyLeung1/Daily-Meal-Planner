@@ -29,5 +29,5 @@ const API = {
 
 #### Running the application
 - Install packages by running "npm i" in the root folder (one time).
-- Go into ./server and run "node server.js" to start the server.
-- Go back into the root folder and run "npm run start"
+- Go into ./server and run "node server.js" to start the server. Wait until you see "Connected to MongoDB using Mongoose!"
+- Go back into the root folder and run "npm run start". If asked to switch ports, answer yes.
